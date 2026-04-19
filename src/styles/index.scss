@@ -1,0 +1,55 @@
+@use '../../node_modules/normalize.css/normalize.css';
+
+@use './common';
+
+:root {
+  font-family: Modak, system-ui;
+}
+
+.scene {
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  > canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.github {
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  z-index: 10;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+
+  background: rgb(255 255 255 / 96%);
+  border: 1px solid rgb(209 213 219 / 90%);
+  backdrop-filter: blur(8px);
+
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  color: inherit;
+  color: #111827;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+}

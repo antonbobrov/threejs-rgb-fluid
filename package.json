@@ -1,0 +1,41 @@
+{
+  "name": "threejs-rgb-fluid",
+  "version": "1.0.0",
+  "scripts": {
+    "lint": "npm run lint:js && npm run lint:style",
+    "lint:js": "eslint . --ext .jsx,.js,.tsx,.ts",
+    "lint:style": "npx stylelint \"**/*.scss\"",
+    "dev": "vite --host",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "format": "npx eslint --fix && npx prettier --write ."
+  },
+  "devDependencies": {
+    "@types/three": "^0.184.0",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-prettier": "^5.5.5",
+    "eslint-plugin-promise": "^7.2.1",
+    "gh-pages": "^6.1.1",
+    "prettier": "^3.8.0",
+    "sass": "^1.85.0",
+    "stylelint": "^16.14.1",
+    "stylelint-config-standard-scss": "^14.0.0",
+    "stylelint-prettier": "^5.0.3",
+    "typescript": "^5",
+    "typescript-eslint": "^8.53.0",
+    "vite": "^6.2.0",
+    "vite-plugin-glsl": "^1.3.3"
+  },
+  "dependencies": {
+    "animejs": "^4.3.6",
+    "normalize.css": "^8.0.1",
+    "three": "^0.184.0",
+    "tsl-textures": "^3.0.1",
+    "vevet": "^5.9.0"
+  }
+}

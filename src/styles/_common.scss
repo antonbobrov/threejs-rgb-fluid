@@ -1,0 +1,15 @@
+html {
+  background-color: #000;
+  color: #fff;
+}
+
+html,
+body {
+  overscroll-behavior: none;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
