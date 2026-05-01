@@ -1,4 +1,4 @@
-import { UniformNode, Vector2, Vector3 } from 'three/webgpu';
+import { UniformNode, Vector2 } from 'three/webgpu';
 
 export type TUFloat = UniformNode<'float', number>;
 
@@ -12,26 +12,24 @@ export type TFlowSettings = {
   blurRadius: number;
   noiseScale: number;
   noiseStrength: number;
-  noiseTextureScale: number;
-  noiseTextureStrength: number;
 };
 
-type TUniformMap = {
-  number: UniformNode<'float', number>;
+type TUniformsTypeMap = {
+  float: UniformNode<'float', number>;
   vec2: UniformNode<'vec2', Vector2>;
-  vec3: UniformNode<'vec3', Vector3>;
 };
 
 export type TUniforms = {
-  mouse: TUniformMap['vec2'];
-  velocity: TUniformMap['vec3'];
-} & Record<keyof TFlowSettings, TUniformMap['number']>;
+  mouse: TUniformsTypeMap['vec2'];
+  velocity: TUniformsTypeMap['vec2'];
+  deltaTime: TUniformsTypeMap['float'];
+} & Record<keyof TFlowSettings, TUniformsTypeMap['float']>;
 
 export interface IFlowProps {
   name: string;
   resolution: number;
-  blurResolution: number;
-  uAspect: TUniformMap['number'];
+  blurDownscale: number;
+  uAspectRatio: TUniformsTypeMap['float'];
   noiseSrc?: string;
   settings: TFlowSettings;
 }

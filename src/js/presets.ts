@@ -1,25 +1,25 @@
 import { Color } from 'three';
 
-import { clonePreset } from './clonePreset';
-import { TPreset } from './types';
+import { extend } from './utils/extend';
 
-const DEFAULTS: TPreset = {
+const DEFAULT = {
+  pointer: {
+    ease: 0.2,
+  },
   flow: {
-    radius: 0.02,
+    radius: 0.025,
     strength: 1,
-    decay: 0.99,
+    decay: 0.00242,
     growScale: 1,
-    advectionStrength: 0.01,
-    blurStrength: 0.2,
-    blurRadius: 3.29,
-    noiseScale: 4,
-    noiseStrength: 0.01,
-    noiseTextureStrength: 0.00035,
-    noiseTextureScale: 2,
+    advectionStrength: 0.007,
+    blurStrength: 0.35,
+    blurRadius: 1,
+    noiseStrength: 0.002,
+    noiseScale: 3,
   },
   rgb: {
     frequency: 10,
-    strength: 0.78209,
+    strength: 0.4,
     mix: 0.35,
   },
   liquid: {
@@ -29,7 +29,7 @@ const DEFAULTS: TPreset = {
     strength: 0.02,
   },
   scene: {
-    distortion: 0.05,
+    distortion: 0.015,
     background: new Color('#f0f1fa'),
   },
   text: {
@@ -38,89 +38,69 @@ const DEFAULTS: TPreset = {
   },
 };
 
-const DARK: TPreset = {
-  ...clonePreset(DEFAULTS),
+const DARK = extend(DEFAULT, {
   rgb: {
-    ...DEFAULTS.rgb,
     frequency: 15,
   },
   scene: {
-    ...DEFAULTS.scene,
     background: new Color('#050505'),
   },
   text: {
-    ...DEFAULTS.text,
     color: new Color('#dedede'),
   },
-};
+});
 
-const NIGHT_BLUE: TPreset = {
-  ...clonePreset(DEFAULTS),
+const NIGHT_BLUE = extend(DEFAULT, {
   scene: {
-    ...DEFAULTS.scene,
     background: new Color('#050505'),
   },
   rgb: {
-    ...DEFAULTS.rgb,
     strength: 0.5,
     mix: 0,
   },
   liquid: {
-    ...DEFAULTS.liquid,
     color: new Color('#1f1fff'),
   },
   text: {
-    ...DEFAULTS.text,
     visible: false,
   },
-};
+});
 
-const NEON: TPreset = {
-  ...clonePreset(DEFAULTS),
+const NEON = extend(DEFAULT, {
   scene: {
-    ...DEFAULTS.scene,
     background: new Color('#050505'),
   },
   rgb: {
-    ...DEFAULTS.rgb,
     strength: 3,
   },
   liquid: {
-    ...DEFAULTS.liquid,
     color: new Color('#1f1fff'),
   },
   text: {
-    ...DEFAULTS.text,
     visible: false,
   },
-};
+});
 
-const GRAINY: TPreset = {
-  ...clonePreset(DEFAULTS),
+const GRAINY = extend(DEFAULT, {
   flow: {
-    ...DEFAULTS.flow,
-    noiseTextureStrength: 0.0028,
-    noiseTextureScale: 1.4,
-    blurRadius: 0.5,
-    blurStrength: 1.9,
+    noiseStrength: 1,
+    noiseScale: 1.4,
+    blurStrength: 0.75,
+    blurRadius: 0.6,
   },
   scene: {
-    ...DEFAULTS.scene,
     background: new Color('#050505'),
   },
   rgb: {
-    ...DEFAULTS.rgb,
     strength: 1,
     mix: 0.16438,
   },
   liquid: {
-    ...DEFAULTS.liquid,
     color: new Color('#ffffff'),
   },
   text: {
-    ...DEFAULTS.text,
     visible: false,
   },
-};
+});
 
-export const PRESETS = { DEFAULTS, DARK, NIGHT_BLUE, NEON, GRAINY };
+export const PRESETS = { DEFAULT, DARK, NIGHT_BLUE, NEON, GRAINY };

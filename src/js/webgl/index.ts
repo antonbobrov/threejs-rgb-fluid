@@ -25,37 +25,9 @@ export class Webgl {
 
   private _height: number;
 
-  private _aspect: UniformNode<'float', number>;
+  private _aspectRatio: UniformNode<'float', number>;
 
   private _inspector?: Inspector;
-
-  get props() {
-    return this._props;
-  }
-
-  get container() {
-    return this._container;
-  }
-
-  get callbacks() {
-    return this._callbacks;
-  }
-
-  get scene() {
-    return this._scene;
-  }
-
-  get renderer() {
-    return this._renderer;
-  }
-
-  get camera() {
-    return this._camera;
-  }
-
-  get inspector() {
-    return this._inspector;
-  }
 
   constructor(
     private _container: HTMLElement,
@@ -73,7 +45,7 @@ export class Webgl {
     // Save initial sizes
     this._width = this._container.offsetWidth;
     this._height = this._container.offsetHeight;
-    this._aspect = uniform(this._width / this._height);
+    this._aspectRatio = uniform(this._width / this._height);
 
     // Create canvas
     this._canvas = document.createElement('canvas');
@@ -82,7 +54,7 @@ export class Webgl {
     // Create camera
     this._camera = new PerspectiveCamera(
       this.fov,
-      this.uAspect.value,
+      this._aspectRatio.value,
       this._props.near,
       this._props.far,
     );
@@ -120,14 +92,42 @@ export class Webgl {
     this._renderer.setAnimationLoop(this.render.bind(this));
   }
 
+  get props() {
+    return this._props;
+  }
+
+  get container() {
+    return this._container;
+  }
+
+  get callbacks() {
+    return this._callbacks;
+  }
+
+  get scene() {
+    return this._scene;
+  }
+
+  get renderer() {
+    return this._renderer;
+  }
+
+  get camera() {
+    return this._camera;
+  }
+
+  get inspector() {
+    return this._inspector;
+  }
+
   /** Resize the scene */
   public resize() {
     this._width = this._container.offsetWidth;
     this._height = this._container.offsetHeight;
-    this._aspect.value = this._width / this._height;
+    this._aspectRatio.value = this._width / this._height;
 
     this._camera.fov = this.fov;
-    this._camera.aspect = this.uAspect.value;
+    this._camera.aspect = this._aspectRatio.value;
     this._camera.position.set(0, 0, this.perspective);
     this._camera.updateProjectionMatrix();
 
@@ -150,8 +150,8 @@ export class Webgl {
   }
 
   /** Aspect ratio */
-  get uAspect() {
-    return this._aspect;
+  get uAspectRatio() {
+    return this._aspectRatio;
   }
 
   /** Camera FOV */
@@ -185,11 +185,12 @@ export class Webgl {
 
   /** Destroy the manager */
   destroy() {
+    this._renderer.setAnimationLoop(null);
+
+    this._resizer?.remove();
     this._canvas.remove();
 
     this._renderer.dispose();
-
     this._callbacks.destroy();
-    this._resizer?.remove();
   }
 }

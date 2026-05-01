@@ -1,10 +1,6 @@
 import { Color } from 'three';
 
-function isPlainObject(value: unknown): value is Record<string, unknown> {
-  if (value === null || typeof value !== 'object') return false;
-
-  return Object.prototype.toString.call(value) === '[object Object]';
-}
+import { isPlainObject } from './isPlainObject';
 
 export function deepAssign<T extends Record<string, any>>(
   target: T,
